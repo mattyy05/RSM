@@ -1,0 +1,547 @@
+#:kivy 2.0.0
+
+<SalesReportScreen>:
+    name: 'sales_report'
+    md_bg_color: [0.94, 0.94, 0.94, 1]
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        # Top Bar with Title
+        MDTopAppBar:
+            title: "[size=42][font=Brico]SALES REPORT[/font][/size]"
+            elevation: 0
+            md_bg_color: [0.639, 0.114, 0.114, 1]
+            specific_text_color: [1, 1, 1, 1]  # White
+            left_action_items: [['arrow-left', lambda x: root.go_back()]]
+            anchor_title: "center"
+
+        # Main Content Area
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+            md_bg_color: [0.98, 0.98, 0.98, 1]  # Light gray background
+
+            # Header Cards - Compact layout
+            MDGridLayout:
+                cols: 2
+                spacing: "12dp"
+                size_hint_y: None
+                height: "160dp"
+
+                # Top Selling Products Card
+                MDCard:
+                    size_hint_y: None
+                    height: "160dp"
+                    elevation: 2
+                    md_bg_color: [0.533, 0.620, 0.451, 1]
+                    padding: "16dp"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: "8dp"
+
+                        # Header with icon and title
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: "8dp"
+                            size_hint_y: None
+                            height: "32dp"
+
+                            MDIcon:
+                                icon: "trophy"
+                                theme_text_color: "Custom"
+                                text_color: [1, 1, 1, 1]
+                                size_hint_x: None
+                                width: "24dp"
+                                halign: "center"
+
+                            MDLabel:
+                                text: "TOP SELLERS"
+                                theme_text_color: "Custom"
+                                text_color: [1, 1, 1, 1]
+                                font_style: "H6"
+                                bold: True
+                                halign: "left"
+
+                        # Products list with better formatting - fills remaining space
+                        MDLabel:
+                            id: top_products_label
+                            text: "Loading..."
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]
+                            font_style: "Body1"
+                            halign: "left"
+                            valign: "top"
+                            markup: True
+                            size_hint_y: 1
+                            padding: [0, 4, 0, 4]
+
+                # Total Sales Card
+                MDCard:
+                    size_hint_y: None
+                    height: "160dp"
+                    elevation: 2
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    padding: "16dp"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing: "8dp"
+
+                        # Header with icon and title
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: "8dp"
+                            size_hint_y: None
+                            height: "32dp"
+
+                            MDIcon:
+                                icon: "cash-multiple"
+                                theme_text_color: "Custom"
+                                text_color: [1, 1, 1, 1]
+                                size_hint_x: None
+                                width: "24dp"
+                                halign: "center"
+
+                            MDLabel:
+                                text: "TOTAL SALES"
+                                theme_text_color: "Custom"
+                                text_color: [1, 1, 1, 1]
+                                font_style: "H6"
+                                bold: True
+                                halign: "left"
+
+                        # Sales amount display - fills remaining space
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "4dp"
+                            size_hint_y: 1
+
+                            MDLabel:
+                                id: total_sales_label
+                                text: "₱0.00"
+                                theme_text_color: "Custom"
+                                text_color: [1, 1, 1, 1]
+                                font_style: "H3"
+                                bold: True
+                                halign: "center"
+                                size_hint_y: None
+                                height: "60dp"
+                                valign: "center"
+
+                            MDLabel:
+                                text: "This Month"
+                                theme_text_color: "Custom"
+                                text_color: [1, 1, 1, 0.8]
+                                font_style: "Body1"
+                                halign: "center"
+                        
+        
+            # Analytics Section
+            MDLabel:
+                text: "[size=18][font=Brico]Sales Analytics[/font][/size]"
+                markup: True
+                size_hint_y: None
+                height: "40dp"
+                theme_text_color: "Primary"
+                halign: "left"
+                bold: True
+
+            # Main Analytics Layout
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "12dp"
+
+                # Left Panel - Metrics
+                MDCard:
+                    size_hint_x: 0.4
+                    elevation: 0
+                    padding: "12dp"
+                    md_bg_color: [1, 1, 1, 1]
+
+                    MDScrollView:
+                        MDBoxLayout:
+                            id: metrics_list
+                            orientation: 'vertical'
+                            spacing: "8dp"
+                            size_hint_y: None
+                            height: self.minimum_height
+
+                            # 1. Sales Volume Section
+                            MDCard:
+                                size_hint_y: None
+                                height: "140dp"
+                                elevation: 0
+                                md_bg_color: [0.208, 0.369, 0.584, 1]  # Blue
+                                padding: "12dp"
+
+                                MDBoxLayout:
+                                    orientation: 'vertical'
+                                    spacing: "6dp"
+
+                                    MDLabel:
+                                        text: "[size=16][font=Brico]SALES VOLUME[/font][/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "left"
+                                        bold: True
+
+                                    MDLabel:
+                                        text: "[size=12]How many items did I sell?[/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 0.8]
+                                        halign: "left"
+
+                                    MDBoxLayout:
+                                        orientation: 'horizontal'
+                                        spacing: "12dp"
+                                        size_hint_y: None
+                                        height: "80dp"
+
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            spacing: "2dp"
+                                            size_hint_x: 0.33
+
+                                            MDLabel:
+                                                text: "Total Items Sold"
+                                                font_style: "Caption"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+
+                                            MDLabel:
+                                                id: total_items_sold_label
+                                                text: "0"
+                                                font_style: "H5"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+                                                bold: True
+
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            spacing: "2dp"
+                                            size_hint_x: 0.33
+
+                                            MDLabel:
+                                                text: "Returns"
+                                                font_style: "Caption"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+
+                                            MDLabel:
+                                                id: returns_label
+                                                text: "0"
+                                                font_style: "H5"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+                                                bold: True
+
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            spacing: "2dp"
+                                            size_hint_x: 0.34
+
+                                            MDLabel:
+                                                text: "Net Sales"
+                                                font_style: "Caption"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+
+                                            MDLabel:
+                                                id: net_sales_label
+                                                text: "0"
+                                                font_style: "H5"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+                                                bold: True
+
+                            # 2. Revenue Section
+                            MDCard:
+                                size_hint_y: None
+                                height: "120dp"
+                                elevation: 0
+                                md_bg_color: [0.639, 0.114, 0.114, 1]  # Red
+                                padding: "12dp"
+
+                                MDBoxLayout:
+                                    orientation: 'vertical'
+                                    spacing: "4dp"
+
+                                    MDLabel:
+                                        text: "[size=16][font=Brico]REVENUE[/font][/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "left"
+                                        bold: True
+
+                                    MDLabel:
+                                        text: "[size=12]How much money did I make?[/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 0.8]
+                                        halign: "left"
+
+                                    MDLabel:
+                                        id: revenue_label
+                                        text: "[size=18][font=Brico]Total Sales: ₱0.00[/font][/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "left"
+                                        bold: True
+
+                                    MDLabel:
+                                        id: revenue_period_label
+                                        text: "[size=12][font=Brico]For current period[/font][/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 0.8]
+                                        halign: "left"
+
+                            # 3. Key Performance Indicators (KPIs)
+                            MDCard:
+                                size_hint_y: None
+                                height: "140dp"
+                                elevation: 0
+                                md_bg_color: [0.533, 0.620, 0.451, 1]  # Green
+                                padding: "12dp"
+
+                                MDBoxLayout:
+                                    orientation: 'vertical'
+                                    spacing: "8dp"
+
+                                    MDLabel:
+                                        text: "[size=16][font=Brico]KEY PERFORMANCE INDICATORS[/font][/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "left"
+                                        bold: True
+
+                                    MDLabel:
+                                        text: "[size=12]Am I doing well?[/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 0.8]
+                                        halign: "left"
+
+                                    MDBoxLayout:
+                                        orientation: 'horizontal'
+                                        spacing: "12dp"
+                                        size_hint_y: None
+                                        height: "70dp"
+
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            spacing: "2dp"
+                                            size_hint_x: 0.5
+
+                                            MDLabel:
+                                                text: "Total Transactions"
+                                                font_style: "Caption"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+
+                                            MDLabel:
+                                                id: total_transactions_label
+                                                text: "0"
+                                                font_style: "H4"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+                                                bold: True
+
+                                        MDBoxLayout:
+                                            orientation: 'vertical'
+                                            spacing: "2dp"
+                                            size_hint_x: 0.5
+
+                                            MDLabel:
+                                                text: "Average Sale"
+                                                font_style: "Caption"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+
+                                            MDLabel:
+                                                id: avg_sale_label
+                                                text: "₱0.00"
+                                                font_style: "H4"
+                                                theme_text_color: "Custom"
+                                                text_color: [1, 1, 1, 1]
+                                                halign: "center"
+                                                bold: True
+
+                            # 4. Comparison Data Section
+                            MDCard:
+                                size_hint_y: None
+                                height: "160dp"
+                                elevation: 0
+                                md_bg_color: [0.831, 0.686, 0.216, 1]  # Gold
+                                padding: "12dp"
+
+                                MDBoxLayout:
+                                    orientation: 'vertical'
+                                    spacing: "8dp"
+
+                                    MDLabel:
+                                        text: "[size=16][font=Brico]COMPARISON DATA[/font][/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [0, 0, 0, 1]
+                                        halign: "left"
+                                        bold: True
+
+                                    MDLabel:
+                                        text: "[size=12]Am I doing better than before?[/size]"
+                                        markup: True
+                                        theme_text_color: "Custom"
+                                        text_color: [0, 0, 0, 0.8]
+                                        halign: "left"
+
+                                    MDGridLayout:
+                                        cols: 3
+                                        spacing: "8dp"
+                                        size_hint_y: None
+                                        height: "90dp"
+
+                                        # Headers
+                                        MDLabel:
+                                            text: "Metric"
+                                            font_style: "Caption"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+                                            bold: True
+
+                                        MDLabel:
+                                            text: "This Period"
+                                            font_style: "Caption"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+                                            bold: True
+
+                                        MDLabel:
+                                            text: "Change"
+                                            font_style: "Caption"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+                                            bold: True
+
+                                        # Sales Volume Row
+                                        MDLabel:
+                                            text: "Sales Volume"
+                                            font_style: "Caption"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "left"
+
+                                        MDLabel:
+                                            id: current_volume_label
+                                            text: "0 units"
+                                            font_style: "Body2"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+
+                                        MDLabel:
+                                            id: volume_change_label
+                                            text: "+0%"
+                                            font_style: "Body2"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+
+                                        # Revenue Row
+                                        MDLabel:
+                                            text: "Revenue"
+                                            font_style: "Caption"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "left"
+
+                                        MDLabel:
+                                            id: current_revenue_label
+                                            text: "₱0.00"
+                                            font_style: "Body2"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+
+                                        MDLabel:
+                                            id: revenue_change_label
+                                            text: "+0%"
+                                            font_style: "Body2"
+                                            theme_text_color: "Custom"
+                                            text_color: [0, 0, 0, 1]
+                                            halign: "center"
+
+                # Right Panel - Details/Charts
+                MDCard:
+                    size_hint_x: 0.6
+                    elevation: 0
+                    padding: "12dp"
+                    md_bg_color: [1, 1, 1, 1]
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: "8dp"
+
+                        MDLabel:
+                            text: "Sales Details & Charts"
+                            size_hint_y: None
+                            height: "40dp"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                            bold: True
+                            halign: "left"
+
+                        MDScrollView:
+                            MDBoxLayout:
+                                id: details_list
+                                orientation: 'vertical'
+                                spacing: "8dp"
+                                size_hint_y: None
+                                height: self.minimum_height
+
+                                # Placeholder for charts/details
+                                MDCard:
+                                    size_hint_y: None
+                                    height: "200dp"
+                                    elevation: 0
+                                    md_bg_color: [0.95, 0.95, 0.95, 1]
+                                    padding: "12dp"
+
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        spacing: "8dp"
+
+                                        MDLabel:
+                                            text: "Sales Trend Chart"
+                                            font_style: "H6"
+                                            theme_text_color: "Primary"
+                                            halign: "left"
+                                            bold: True
+
+                                        MDLabel:
+                                            text: "Chart visualization will be displayed here"
+                                            font_style: "Body2"
+                                            theme_text_color: "Secondary"
+                                            halign: "left"
+
+                
+

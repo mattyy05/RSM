@@ -1,0 +1,181 @@
+#:kivy 2.0.0
+
+<PaymentsScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        # Top Bar with Title
+        MDTopAppBar:
+            title: "[size=40][font=Brico]PAYMENTS MANAGEMENT[/font][/size]"
+            elevation: 0
+            md_bg_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+            specific_text_color: [1, 1, 1, 1]  # White
+            left_action_items: [['arrow-left', lambda x: root.go_back()]]
+            anchor_title: "center"
+
+        # Navigation Buttons
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: "76dp"
+            padding: "8dp"
+            
+            MDGridLayout:
+                cols: 6
+                spacing: "16dp"
+                size_hint_y: None
+                height: "60dp"
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]POINT OF SALE[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('main')
+                
+                MDFlatButton:
+                    id: inventory_button
+                    text: "[color=#ffffff][size=25][font=Brico]INVENTORY[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('inventory')
+                
+                MDFlatButton:
+                    id: transactions_button
+                    text: "[color=#ffffff][size=25][font=Brico]TRANSACTIONS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('transactions')
+
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]PAYMENTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    disabled: True
+                
+                MDFlatButton:
+                    id: reports_button
+                    text: "[color=#ffffff][size=25][font=Brico]REPORTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('reports')
+                
+                MDFlatButton:
+                    id: user_management_button
+                    text: "[color=#ffffff][size=25][font=Brico]USERS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('user_management')
+
+        # Main Content with Tabs
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            MDTabs:
+                id: tabs
+                tab_indicator_height: "4dp"
+                tab_indicator_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+
+                # Customer Payments Tab
+                Tab:
+                    id: customer_tab
+                    title: "[font=Brico]Customer Payments[/font]"
+                    markup: True
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "16dp"
+                        spacing: "16dp"
+
+                        # Tab Header
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: "50dp"
+
+                            MDLabel:
+                                text: "[size=20][font=Brico]RECEIVABLES - Customer Credit Sales[/font][/size]"
+                                markup: True
+                                theme_text_color: "Primary"
+                                halign: "left"
+
+                            MDIconButton:
+                                icon: "refresh"
+                                on_release: root.load_customer_payments()
+                                tooltip: "Refresh customer payments"
+
+                        # Customer Payments Content
+                        MDBoxLayout:
+                            id: customer_payments_tab
+                            orientation: 'vertical'
+
+                # Supplier Payments Tab
+                Tab:
+                    id: supplier_tab
+                    title: "[font=Brico]Supplier Payments[/font]"
+                    markup: True
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "16dp"
+                        spacing: "16dp"
+
+                        # Tab Header
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: "50dp"
+
+                            MDLabel:
+                                text: "[size=20][font=Brico]PAYABLES - Supplier Credit Purchases[/font][/size]"
+                                markup: True
+                                theme_text_color: "Primary"
+                                halign: "left"
+
+                            MDIconButton:
+                                icon: "refresh"
+                                on_release: root.load_supplier_payments()
+                                tooltip: "Refresh supplier payments"
+
+                        # Supplier Payments Content
+                        MDBoxLayout:
+                            id: supplier_payments_tab
+                            orientation: 'vertical'
+
+                # Operating Expenses Tab
+                Tab:
+                    id: expenses_tab
+                    title: "[font=Brico]Operating Expenses[/font]"
+                    markup: True
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "16dp"
+                        spacing: "16dp"
+
+                        # Tab Header
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: "50dp"
+
+                            MDLabel:
+                                text: "[size=20][font=Brico]OPERATING EXPENSES[/font][/size]"
+                                markup: True
+                                theme_text_color: "Primary"
+                                halign: "left"
+
+                            MDIconButton:
+                                icon: "refresh"
+                                on_release: root.load_expenses()
+                                tooltip: "Refresh expenses"
+
+                        # Expenses Content
+                        MDBoxLayout:
+                            id: expenses_tab_content
+                            orientation: 'vertical'

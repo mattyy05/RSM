@@ -1,0 +1,146 @@
+#:kivy 2.0.0
+
+<TransactionsScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        # Top Bar
+        MDTopAppBar:
+            title: "[size=40][font=Brico]TRANSACTIONS[/font][/size]"
+            elevation: 0
+            md_bg_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+            specific_text_color: [1, 1, 1, 1]  # White
+            right_action_items: [["refresh", lambda x: root.refresh_transactions()]]
+            anchor_title: "center"
+
+        
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: "16dp"
+            spacing: "16dp"
+            
+            # Stats and Navigation Row
+            MDGridLayout:
+                cols: 6
+                spacing: "16dp"
+                size_hint_y: None
+                height: "60dp"
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]POINT OF SALE[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('main')
+                
+                MDFlatButton:
+                    id: inventory_button
+                    text: "[color=#ffffff][size=25][font=Brico]INVENTORY[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('inventory')
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]TRANSACTIONS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('transactions')
+                    disabled: True
+
+                MDFlatButton:
+                    id: payments_button
+                    text: "[color=#ffffff][size=25][font=Brico]PAYMENTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('payments')
+                
+                MDFlatButton:
+                    id: reports_button
+                    text: "[color=#ffffff][size=25][font=Brico]REPORTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('reports')
+                
+                MDFlatButton:
+                    id: user_management_button
+                    text: "[color=#ffffff][size=25][font=Brico]USERS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('user_management')
+                
+            
+            # Filter and Search Row
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: "16dp"
+                size_hint_y: None
+                height: "50dp"
+                
+                MDFlatButton:
+                    text: "[color=#ffffff]All Types[/color]"
+                    size_hint_x: 0.15
+                    md_bg_color: [0.427, 0.137, 0.137, 1]
+                    elevation: 0
+                
+                MDFlatButton:
+                    text: "[color=#ffffff]Sales[/color]"
+                    size_hint_x: 0.15
+                    md_bg_color: [0.533, 0.620, 0.451, 1]
+                    elevation: 0
+                
+                MDFlatButton:
+                    text: "[color=#ffffff]Expenses[/color]"
+                    size_hint_x: 0.15
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                
+                MDFlatButton:
+                    text: "[color=#ffffff]Adjustments[/color]"
+                    size_hint_x: 0.15
+                    md_bg_color: [1, 0.647, 0, 1]
+                    elevation: 0
+                
+                MDFlatButton:
+                    id: written_off_toggle
+                    text: "[color=#ffffff]Show Written-off[/color]"
+                    size_hint_x: 0.2
+                    md_bg_color: [0.5, 0.5, 0.5, 1]
+                    elevation: 0
+                    on_release: root.toggle_written_off_display()
+            
+            # Transactions List Header
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: "40dp"
+                spacing: "16dp"
+                
+                MDLabel:
+                    text: "[size=20][font=Brico]Recent Transactions[/font][/size]"
+                    markup: True
+                    size_hint_x: 0.7
+                    font_style: "H6"
+                    theme_text_color: "Primary"
+                
+                MDLabel:
+                    text: "[size=14]Click the eye icon (👁) to view journal entry details[/size]"
+                    markup: True
+                    size_hint_x: 0.3
+                    font_style: "Caption"
+                    theme_text_color: "Hint"
+                    halign: "right"
+            
+            # Transactions List (Scrollable)
+            MDScrollView:
+                MDBoxLayout:
+                    id: transactions_list
+                    orientation: 'vertical'
+                    spacing: "8dp"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: [0, 8, 0, 8]

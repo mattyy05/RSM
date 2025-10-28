@@ -1,0 +1,329 @@
+#:kivy 2.0.0
+
+<InventoryScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        # Top Bar with Title and Stats
+        MDTopAppBar:
+            title: "[size=40][font=Brico]INVENTORY[/font][/size]"
+            elevation: 0
+            md_bg_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+            specific_text_color: [1, 1, 1, 1]  # White
+            left_action_items: [['arrow-left', lambda x: root.go_back()]]
+            anchor_title: "center"
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: "16dp"
+            spacing: "16dp"
+            
+            # Stats Cards
+            MDGridLayout:
+                cols: 5
+                spacing: "16dp"
+                size_hint_y: None
+                height: "100dp"
+                
+                # Beginning Inventory Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1]  # #889e73
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]BEGINNING INVENTORY[/font][/size]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                            
+                        MDLabel:
+                            id: beginning_inventory_amount_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                            
+                        MDLabel:
+                            id: beginning_inventory_label
+                            text: "No data"
+                            halign: "center"
+                            font_style: "Caption"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Purchases Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1]  # #889e73
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]PURCHASES[/font][/size]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: purchases_amount_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: purchases_label
+                            text: "No data"
+                            halign: "center"
+                            font_style: "Caption"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Purchase Returns Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1] 
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]PURCHASE RETURNS[/font]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: purchase_returns_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Sales Returns Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1] 
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]SALES RETURNS[/font]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: sales_returns_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Total Available for Sale Card
+                MDCard:
+                    md_bg_color: [0.427, 0.137, 0.137, 1]  # #6d2323
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]TOTAL AVAILABLE FOR SALE[/font]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: total_available_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+            
+            # Navigation Buttons
+            MDGridLayout:
+                cols: 6
+                spacing: "16dp"
+                size_hint_y: None
+                height: "60dp"
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]POINT OF SALE[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('main')
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]INVENTORY[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    disabled: True
+                
+                MDFlatButton:
+                    id: transactions_button
+                    text: "[color=#ffffff][size=25][font=Brico]TRANSACTIONS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('transactions')
+
+                MDFlatButton:
+                    id: payments_button
+                    text: "[color=#ffffff][size=25][font=Brico]PAYMENTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('payments')
+                
+                MDFlatButton:
+                    id: reports_button
+                    text: "[color=#ffffff][size=25][font=Brico]REPORTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('reports')
+                
+                MDFlatButton:
+                    id: user_management_button
+                    text: "[color=#ffffff][size=25][font=Brico]USERS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('user_management')
+
+            # Inventory Content
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: "16dp"
+
+                # Header with Search
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: "60dp"
+                    spacing: "16dp"
+                    
+                    MDLabel:
+                        text: "[size=30][font=Brico]INVENTORY MANAGEMENT[/font]"
+                        markup: True
+                        size_hint_x: 0.4
+                        theme_text_color: "Primary"
+                    
+                    Widget:  # Spacer
+                    
+                
+                # Action Buttons Row
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: "48dp"
+                    spacing: "12dp"
+                    
+                    MDFlatButton:
+                        text: "ADD PRODUCT"
+                        md_bg_color: [0.533, 0.620, 0.451, 1]  # POS Green
+                        theme_text_color: "Custom"
+                        text_color: [1, 1, 1, 1]
+                        elevation: 0
+                        size_hint_x: 0.2
+                        on_release: root.add_product()
+                    
+                    MDFlatButton:
+                        text: "LOW STOCK ALERT"
+                        md_bg_color: [0.831, 0.686, 0.216, 1]  # POS Gold
+                        theme_text_color: "Custom"
+                        text_color: [0.639, 0.114, 0.114, 1]  # POS Red text
+                        elevation: 0
+                        size_hint_x: 0.2
+                        on_release: root.show_low_stock()
+
+                    MDFlatButton:
+                        text: "RETURNS"
+                        md_bg_color: [0.831, 0.686, 0.216, 1]  # POS Gold
+                        theme_text_color: "Custom"
+                        text_color: [0.639, 0.114, 0.114, 1]  # POS Red text
+                        elevation: 0
+                        size_hint_x: 0.2
+                        on_release: root.show_returns_dialog()
+
+                    MDFlatButton:
+                        text: "CASH INVESTMENT"
+                        md_bg_color: [0.533, 0.620, 0.451, 1]  # POS Green
+                        theme_text_color: "Custom"
+                        text_color: [1, 1, 1, 1]  # White text
+                        elevation: 0
+                        size_hint_x: 0.2
+                        on_release: root.show_cash_investment_dialog()
+                    
+                    Widget:  # Spacer
+
+                # Products Table Container
+                MDCard:
+                    elevation: 0
+                    padding: "16dp"
+                    md_bg_color: [1, 1, 1, 1]
+                    
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: "12dp"
+                        
+                        # Table Header
+                        MDBoxLayout:
+                            size_hint_y: None
+                            height: "40dp"
+                            md_bg_color: [0.95, 0.95, 0.95, 1]
+                            padding: "12dp"
+                            
+                            MDLabel:
+                                text: "[b]Product[/b]"
+                                markup: True
+                                size_hint_x: 0.25
+                                font_style: "Subtitle2"
+                            
+                            MDLabel:
+                                text: "[b]SKU[/b]"
+                                markup: True
+                                size_hint_x: 0.15
+                                font_style: "Subtitle2"
+                            
+                            MDLabel:
+                                text: "[b]Stock[/b]"
+                                markup: True
+                                size_hint_x: 0.12
+                                font_style: "Subtitle2"
+                                halign: "center"
+                            
+                            MDLabel:
+                                text: "[b]Cost Price[/b]"
+                                markup: True
+                                size_hint_x: 0.15
+                                font_style: "Subtitle2"
+                                halign: "right"
+                            
+                            MDLabel:
+                                text: "[b]Sell Price[/b]"
+                                markup: True
+                                size_hint_x: 0.15
+                                font_style: "Subtitle2"
+                                halign: "right"
+                            
+                            MDLabel:
+                                text: "[b]Actions[/b]"
+                                markup: True
+                                size_hint_x: 0.18
+                                font_style: "Subtitle2"
+                                halign: "center"
+                        
+                        # Products List
+                        MDScrollView:
+                            MDBoxLayout:
+                                id: product_list
+                                orientation: 'vertical'
+                                spacing: "4dp"
+                                adaptive_height: True

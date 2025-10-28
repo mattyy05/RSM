@@ -1,0 +1,389 @@
+
+#:kivy 2.0.0
+
+<MainScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        # Top Bar with Title and User Info
+        MDTopAppBar:
+            title: "[size=40][font=Brico]RETAIL STORE MANAGER[/font][/size]"
+            elevation: 0
+            md_bg_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+            specific_text_color: [1, 1, 1, 1]  # White
+            right_action_items: [["logout", lambda x: root.logout(), "Logout"]]
+            anchor_title: "center"
+        
+        # User Info Bar
+        MDCard:
+            size_hint_y: None
+            height: "40dp"
+            elevation: 0
+            md_bg_color: [0.533, 0.620, 0.451, 1]  # Green
+            padding: "8dp"
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                
+                MDLabel:
+                    id: user_info_label
+                    text: "Not logged in"
+                    theme_text_color: "Custom"
+                    text_color: [1, 1, 1, 1]
+                    size_hint_x: 1
+                    font_style: "Body2"
+                
+                MDLabel:
+                    id: session_time_label
+                    text: ""
+                    theme_text_color: "Custom"
+                    text_color: [1, 1, 1, 1]
+                    size_hint_x: None
+                    width: "150dp"
+                    halign: "right"
+                    font_style: "Caption"
+
+        
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: "16dp"
+            spacing: "16dp"
+            
+            # Stats Cards
+            MDGridLayout:
+                cols: 4
+                spacing: "16dp"
+                size_hint_y: None
+                height: "100dp"
+                
+                # Total Sales Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1]  # #889e73
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]TOTAL SALES[/font]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                            
+                        MDLabel:
+                            id: total_sales_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Total Expenses Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1]  # #889e73
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]COST OF GOODS SOLD[/font][/size]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: cost_of_goods_sold_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Net Profit Card
+                MDCard:
+                    md_bg_color: [0.533, 0.620, 0.451, 1] 
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]GROSS PROFIT[/font]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: gross_profit_label
+                            text: "₱0.00"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                
+                # Low Stock Items Card
+                MDCard:
+                    md_bg_color: [0.427, 0.137, 0.137, 1]  # #6d2323
+                    radius: 0
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: "8dp"
+                        MDLabel:
+                            text: "[size=25][font=Brico]LOW STOCK ITEMS[/font]"
+                            markup: True
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+                        MDLabel:
+                            id: low_stock_label
+                            text: "0"
+                            halign: "center"
+                            font_style: "H5"
+                            theme_text_color: "Custom"
+                            text_color: [1, 1, 1, 1]  # White
+            
+            # Navigation Buttons
+            MDGridLayout:
+                cols: 6
+                spacing: "16dp"
+                size_hint_y: None
+                height: "60dp"
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]POINT OF SALE[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    disabled: True
+                
+                MDFlatButton:
+                    id: inventory_button
+                    text: "[color=#ffffff][size=25][font=Brico]INVENTORY[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('inventory')
+                
+                MDFlatButton:
+                    id: transactions_button
+                    text: "[color=#ffffff][size=25][font=Brico]TRANSACTIONS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('transactions')
+
+                MDFlatButton:
+                    id: payments_button
+                    text: "[color=#ffffff][size=25][font=Brico]PAYMENTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('payments')
+                
+                MDFlatButton:
+                    id: reports_button
+                    text: "[color=#ffffff][size=25][font=Brico]REPORTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('reports')
+                
+                MDFlatButton:
+                    id: user_management_button
+                    text: "[color=#ffffff][size=25][font=Brico]USERS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('user_management')
+            
+            # Main Content Area
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: "16dp"
+                padding: [0, 0, 16, 0]  # Add right padding for the cart
+                
+                # Left Side Categories
+                MDCard:
+                    size_hint_x: 0.15
+                    elevation: 0
+                    padding: "8dp"
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: "8dp"
+                        
+                        MDLabel:
+                            text: "Categories"
+                            font_style: "H6"
+                            size_hint_y: None
+                            height: "48dp"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: [0.831, 0.686, 0.216, 1]  # Gold
+                        
+                        MDScrollView:
+                            MDGridLayout:
+                                cols: 1
+                                spacing: "8dp"
+                                padding: "8dp"
+                                size_hint_y: None
+                                height: self.minimum_height
+                                
+                                MDCard:
+                                    size_hint_y: None
+                                    height: "120dp"
+                                    ripple_behavior: True
+                                    on_release: root.switch_category("all")
+                                    padding: "8dp"
+                                    
+                                    MDBoxLayout:
+                                        orientation: 'vertical'
+                                        spacing: "4dp"
+                                        MDLabel:
+                                            text: ""
+                                            halign: "center"
+                                            size_hint_y: 0.7
+                                            font_style: "H3"
+                                            theme_text_color: "Primary"
+                                        MDLabel:
+                                            text: "All Products"
+                                            halign: "center"
+                                            size_hint_y: 0.3
+                                
+                                # Dynamic categories will be loaded here
+                                MDBoxLayout:
+                                    id: dynamic_categories_container
+                                    orientation: 'vertical'
+                                    spacing: "8dp"
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                
+                # Center Product Display
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: "16dp"
+                    size_hint_x: 0.6
+                    
+                    MDScrollView:
+
+                        MDGridLayout:
+                            id: products_grid
+                            cols: 3
+                            padding: "16dp"
+                            spacing: "16dp"
+                            size_hint_y: None
+                            height: self.minimum_height
+                
+                # Right Side Cart
+                MDCard:
+                    id: cart_widget
+                    size_hint_x: 0
+                    opacity: 0
+                    disabled: True
+                    elevation: 0
+                    padding: 0
+                    radius: [15, 15, 15, 15]  # Rounded corners: top-left, top-right, bottom-right, bottom-left
+                    md_bg_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+                    
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: "16dp"
+                        padding: "16dp"
+                        radius: [15, 15, 15, 15]  # Rounded corners matching the parent card
+                        md_bg_color: [0.639, 0.114, 0.114, 1]  # #a31d1d
+                        
+                        # Cart Header
+                        MDLabel:
+                            text: "Shopping Cart"
+                            font_style: "H6"
+                            size_hint_y: None
+                            height: "48dp"
+                            theme_text_color: "Custom"
+                            text_color: [0.831, 0.686, 0.216, 1]  # Gold
+                        
+                        # Cart Items List
+                        MDScrollView:
+                            MDList:
+                                id: cart_items
+                                spacing: "8dp"
+                                
+                                # Cart items will be added dynamically
+                        
+                        # Cart Summary
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint_y: None
+                            height: "80dp"
+                            spacing: "8dp"
+                            padding: [0, 16, 0, 0]
+                            
+                            MDSeparator:
+                                height: "1dp"
+                                
+                            MDLabel:
+                                id: cart_total
+                                text: "Total: ₱ 0.00"
+                                font_style: "H6"
+                            
+                            # Payment type selection
+                            MDLabel:
+                                text: "Payment Method:"
+                                font_style: "Caption"
+                                size_hint_y: None
+                                height: "20dp"
+                                theme_text_color: "Secondary"
+                            
+                            MDBoxLayout:
+                                orientation: "horizontal"
+                                spacing: "12dp"
+                                size_hint_y: None
+                                height: "40dp"
+                                
+                                MDBoxLayout:
+                                    orientation: "horizontal"
+                                    spacing: "8dp"
+                                    size_hint_x: 0.5
+                                    
+                                    MDCheckbox:
+                                        id: cash_radio
+                                        group: "payment_type"
+                                        active: True
+                                        size_hint_x: None
+                                        width: "30dp"
+                                        on_active: if self.active: ar_radio.active = False
+                                        
+                                    MDLabel:
+                                        text: "Cash"
+                                        font_style: "Body2"
+                                        valign: "center"
+                                        on_touch_down: if self.collide_point(*args[1].pos): (setattr(cash_radio, 'active', True), setattr(ar_radio, 'active', False))
+                                
+                                MDBoxLayout:
+                                    orientation: "horizontal"
+                                    spacing: "8dp"
+                                    size_hint_x: 0.5
+                                    
+                                    MDCheckbox:
+                                        id: ar_radio
+                                        group: "payment_type"
+                                        size_hint_x: None
+                                        width: "30dp"
+                                        on_active: if self.active: cash_radio.active = False
+                                        
+                                    MDLabel:
+                                        text: "A/R"
+                                        font_style: "Body2"
+                                        valign: "center"
+                                        on_touch_down: if self.collide_point(*args[1].pos): (setattr(ar_radio, 'active', True), setattr(cash_radio, 'active', False))
+                            
+                            MDRaisedButton:
+                                id: checkout_button
+                                text: "Checkout"
+                                size_hint_x: 1
+                                md_bg_color: [0.831, 0.686, 0.216, 1]  # Gold
+                                text_color: [0.5, 0.2, 0, 1]  # Dark brown
+                                elevation: 0
+                                line_color: [0.7, 0.5, 0.1, 1]
+                                line_width: 1
+                                disabled: False
+                                on_release: app.checkout_with_selected_payment()

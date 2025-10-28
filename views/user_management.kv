@@ -1,0 +1,205 @@
+#:kivy 2.0.0
+
+<UserManagementScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        # Top Bar
+        MDTopAppBar:
+            title: "[size=32][font=Brico]USER MANAGEMENT[/font][/size]"
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            md_bg_color: [0.639, 0.114, 0.114, 1]  # Brand red
+            specific_text_color: [1, 1, 1, 1]  # White
+            anchor_title: "center"
+            elevation: 2
+        
+        # Content Area
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: "16dp"
+            spacing: "16dp"
+            
+            # Navigation Buttons
+            MDGridLayout:
+                cols: 6
+                spacing: "16dp"
+                size_hint_y: None
+                height: "60dp"
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]POINT OF SALE[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('main')
+                
+                MDFlatButton:
+                    id: inventory_button
+                    text: "[color=#ffffff][size=25][font=Brico]INVENTORY[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('inventory')
+                
+                MDFlatButton:
+                    id: transactions_button
+                    text: "[color=#ffffff][size=25][font=Brico]TRANSACTIONS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('transactions')
+
+                MDFlatButton:
+                    id: payments_button
+                    text: "[color=#ffffff][size=25][font=Brico]PAYMENTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('payments')
+                
+                MDFlatButton:
+                    id: reports_button
+                    text: "[color=#ffffff][size=25][font=Brico]REPORTS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    on_release: root.switch_screen('reports')
+                
+                MDFlatButton:
+                    text: "[color=#ffffff][size=25][font=Brico]USERS[/font][/color]"
+                    size_hint_x: 1
+                    md_bg_color: [0.639, 0.114, 0.114, 1]
+                    elevation: 0
+                    disabled: True
+
+            # Header Section
+            MDCard:
+                size_hint_y: None
+                height: "120dp"
+                md_bg_color: [0.533, 0.620, 0.451, 1]  # Green
+                padding: "16dp"
+                elevation: 1
+                radius: [8, 8, 8, 8]
+                
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: "8dp"
+                    
+                    MDLabel:
+                        text: "[size=24][font=Brico]Manage Users[/font][/size]"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: [1, 1, 1, 1]
+                        font_style: "H5"
+                        bold: True
+                    
+                    MDLabel:
+                        text: "Create, view, and manage user accounts. Only owners can access this feature."
+                        theme_text_color: "Custom"
+                        text_color: [1, 1, 1, 1]
+                        font_style: "Body2"
+            
+            # Action Buttons Section
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: "16dp"
+                size_hint_y: None
+                height: "56dp"
+                
+                MDFlatButton:
+                    text: "[size=16]+ ADD NEW USER[/size]"
+                    markup: True
+                    md_bg_color: [0.533, 0.620, 0.451, 1]  # Green
+                    theme_text_color: "Custom"
+                    text_color: [1, 1, 1, 1]
+                    icon: "account-plus"
+                    elevation: 2
+                    on_release: root.show_add_user_dialog()
+                
+                MDFlatButton:
+                    text: "[size=16]REFRESH LIST[/size]"
+                    markup: True
+                    md_bg_color: [0.639, 0.114, 0.114, 1]  # Red
+                    theme_text_color: "Custom"
+                    text_color: [1, 1, 1, 1]
+                    icon: "refresh"
+                    elevation: 2
+                    on_release: root.load_users()
+            
+            # Users List Section
+            MDCard:
+                md_bg_color: [0.98, 0.98, 0.98, 1]  # Very light gray
+                padding: "16dp"
+                elevation: 1
+                radius: [8, 8, 8, 8]
+                
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: "12dp"
+                    
+                    # Section Header
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: "40dp"
+                        spacing: "8dp"
+                        
+                        MDIcon:
+                            icon: "account-group"
+                            theme_icon_color: "Custom"
+                            icon_color: [0.639, 0.114, 0.114, 1]
+                            size_hint_x: None
+                            width: "32dp"
+                        
+                        MDLabel:
+                            text: "Existing Users"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                            bold: True
+                    
+                    # Divider
+                    Widget:
+                        size_hint_y: None
+                        height: "1dp"
+                        canvas.before:
+                            Color:
+                                rgba: [0.9, 0.9, 0.9, 1]
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                    
+                    # Users Container with Scroll
+                    MDScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        
+                        MDBoxLayout:
+                            id: users_container
+                            orientation: 'vertical'
+                            spacing: "12dp"
+                            size_hint_y: None
+                            height: self.minimum_height
+                            padding: [0, "8dp", 0, "8dp"]
+        
+        # Footer
+        MDCard:
+            size_hint_y: None
+            height: "60dp"
+            md_bg_color: [0.95, 0.95, 0.95, 1]
+            padding: "16dp"
+            elevation: 0
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                
+                MDLabel:
+                    text: "User Management System - Owner Access Only"
+                    theme_text_color: "Secondary"
+                    font_style: "Caption"
+                    halign: "left"
+                
+                MDLabel:
+                    text: f"Version 1.0 - {app.auth_manager.get_current_user()['username'] if app.auth_manager.is_authenticated() else 'Not logged in'}"
+                    theme_text_color: "Secondary"
+                    font_style: "Caption"
+                    halign: "right"
